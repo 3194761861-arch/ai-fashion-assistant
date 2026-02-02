@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能穿搭助手</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #f9f9f9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        #chat-container {
+            height: 100vh;
+            width: 100vw;
+        }
+        /* 强制隐藏悬浮按钮，并确保聊天窗口直接显示 */
+        .coze-chat-launcher {
+            display: none !important;
+        }
+        .coze-chat-window {
+            border: none !important;
+            border-radius: 0 !important;
+            display: flex !important; /* 强制显示聊天窗口 */
+            position: relative !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container"></div>
+    <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
+<script>
+  const client = new CozeWebSDK.WebChatClient({
+    config: {
+      bot_id: '7600277051492450350',
+    },
+    componentProps: {
+      title: '智能穿搭助手',
+    },
+    el: document.getElementById('chat-container'),
+    ui: {
+        base: {
+            icon: '', 
+            layout: 'full',
+            zIndex: 1000,
+        },
+        chatBot: {
+            title: '智能穿搭助手',
+            width: '100%',
+            height: '100%',
+        },
+        footer: {
+            isShow: false,
+        }
+    },
+    auth: {
+      type: 'token',
+      token: 'pat_bcAwVgFrNhuAKj63VXFaIO7ekUe3zBB1K4mjzL7rpWQWyBuQj2rLexNYR37dlxLn',
+      onRefreshToken: function () {
+        return 'pat_bcAwVgFrNhuAKj63VXFaIO7ekUe3zBB1K4mjzL7rpWQWyBuQj2rLexNYR37dlxLn'
+      }
+    }
+  });
+
+  // 确保在页面加载后尝试显示
+  window.onload = () => {
+    if (client && typeof client.show === 'function') {
+        client.show();
+    }
+  };
+</script>
+</body>
+</html>
